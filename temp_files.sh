@@ -3,10 +3,20 @@
 current_time=$(date +'%d/%m/%Y @ %H:%M:%S')
 hostname=$(hostname)
 
-message="This script has worked! 😊 \n\
-Time of change: $current_time \n\
-Hostname of Machine: $hostname"
+# Construct the HTML content
+html_content="<!DOCTYPE html>
+<html>
+<body>
 
-for file in /var/www/html/index.html /root/hello-world.txt; do
-    echo -e "${message//\n/<br>}" > "$file"  # Replace \n with <br> for index.html
-done
+<h1>This script has worked!</h1>
+<p>Time of change: $current_time</p>
+<p>Hostname: $hostname</p>
+
+</body>
+</html>
+"
+
+# Export to index.html in /var/www/html
+echo "$html_content" > /var/www/html/index.html
+
+echo "HTML content exported to /var/www/html/index.html"
